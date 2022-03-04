@@ -1,0 +1,15 @@
+"phpErrorHandler" => function (\Slim\Container $c) {
+        return function ($req, $resp, \Throwable $error) {
+            $resp = $resp->withStatus(500);
+            $resp->getBody()->write(json_encode(
+                [
+                    "type" => "error",
+                    "error" => "500",
+                    "message" => "Erreur serveur : {$error->getMessage()}",
+                    "trace" => $error->getTraceAsString(),
+                    "file" => $error->getFile()."ligne: ".$error->getLine(),
+                ]
+            ));
+            return $resp;
+        };
+    },
