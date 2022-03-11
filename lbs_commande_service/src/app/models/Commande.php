@@ -11,7 +11,7 @@ class Commande extends \Illuminate\Database\Eloquent\Model
     public $incrementing = false;
     protected $keytype = "string";
 
-
+    const CREATED = 1;
     public function items() {
         return $this->hasMany(Item::class, "commande_id");
     }

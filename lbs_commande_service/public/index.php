@@ -85,7 +85,7 @@ $app->get(
     '/commandes/{id}[/]',
     function (Request $req, Response $resp, $args): Response {
         $ctrl = new CommandController($this);
-        return $ctrl->listCommandsById($req, $resp, $args);
+        return $ctrl->GetCommand($req, $resp, $args);
     }
 );
 $app->get(
@@ -93,6 +93,14 @@ $app->get(
     function (Request $req, Response $resp, $args): Response {
         $ctrl = new CommandController($this);
         return $ctrl->CommandsByIdWithItems($req, $resp, $args);
+    }
+);
+
+$app->post(
+    '/commande[/]',
+    function (Request $req, Response $resp, $args): Response {
+        $ctrl = new CommandController($this);
+        return $ctrl->addCommand($req, $resp, $args);
     }
 );
 
