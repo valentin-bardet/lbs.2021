@@ -22,7 +22,7 @@ $configuration = [
     },
     "phpErrorHandler" => function (\Slim\Container $c) {
         return function ($req, $resp, \Throwable $error) {
-            $resp = $resp->withStatus(500);
+            $resp = $resp->withStatus(500)->withHeader('Content-Type', 'application/json');
             $resp->getBody()->write(json_encode(
                 [
                     "type" => "error",
@@ -38,7 +38,7 @@ $configuration = [
 
     "notAllowedHandler" => function ($c) {
         return function ($req, $resp, $methods) {
-            $resp = $resp->withStatus(405);
+            $resp = $resp->withStatus(405)->withHeader('Content-Type', 'application/json');
             $resp->getBody()->write(json_encode(
                 [
                     "type" => "error",
